@@ -10,38 +10,38 @@ from time import strftime #импорт для часов
 import os #импорт для определения пути на ПК
 import pygame #импорт для музыки и звуков
 
-#Родительский класс
+#Родительский класс / Parent class
 class  Main_parser(ttk.Combobox):   
 
-    #Список недопустимых варинатов парсинга городов
+    #Список недопустимых варинатов парсинга городов / List of invalid parsing options
     zapret = ['Russia','Far Eastern District','Crimean Federal District','North-Western District','Volga District',
 'North Caucasus District','Siberian District','Ural District','Central District','Southern District','Abkhazia','Azerbaijan',
 'Armenia','Belarus','Belgium','Germany','Greece','Georgia','Israel','Spain','Italy','Kazakhstan','Cyprus','Kyrgyzstan',
 'China','Latvia','Lithuania','Moldova','Mongolia','Portugal','USA','Tajikistan','Turkmenistan','Uzbekistan','Ukraine','Estonia','Serbia','Poland',
 'Great Britain','Turkey','Czech Republic','Republic of Korea','Bulgaria','Vietnam','Taiwan','Iran','Benin','Back','']
     
-    #Список стран
+    #Список стран / List of countries
     eng_city_main = ['Choose a city','Russia','Abkhazia','Azerbaijan','Armenia','Belarus','Belgium','Germany','Greece','Georgia','Israel','Spain','Italy',
 'Kazakhstan','Cyprus','Kyrgyzstan','China','Latvia','Lithuania','Moldova','Mongolia','Portugal','USA','Tajikistan','Turkmenistan',
 'Uzbekistan','Ukraine','Estonia','Serbia','Poland','Great Britain','Turkey','Czech Republic','Republic of Korea','Bulgaria','Vietnam',
 'Taiwan','Iran','Benin']
 
-    #Список округов России
+    #Список округов России / List of districts of Russia
     eng_russia = ['Far Eastern District','Crimean Federal District','North-Western District','Volga District','North Caucasus District',
     'Siberian District','Ural District','Central District','Southern District','Back']
 
-    #Список городов округа и их id
+    #Список городов округа и их id / List of cities in the district and their IDs
     eng_city_dal_east = ['Aldan','Amursk','Arsenyev','Artem','Belogorsk (Amur region)','Birobidzhan','Blagoveshchensk','Vanino','Vladivostok',
 'Dalnegorsk','Dolinsk','Other cities of the Far Eastern Federal District','Yelizovo','Kovalerovo','Komsomolsk-on-Amur','Lensk','Lesozavodsk',
 'Magadan','Mirny','Nahodka','Neryungri','Nyurba','Petropavlovsk-Kamchatsky','Svobodny','Sovetskaya Gavan','Spassk Dalny','Tynda','Ussuriysk',
 'Khabarovsk','Kholmsk','Yuzhno-Sakhalinsk','Yakutsk','Baсk']
     id_dal_east = [41,1203,172,160,176,11,24,595,15,1530,1168,89,1167,1529,48,240,1528,50,678,161,16,358,85,1166,33,808,219,173,20,1338,156,10]
 
-    #Список городов округа и их id
+    #Список городов округа и их id / List of cities in the district and their IDs
     eng_city_krim = ['Other cities of the CFR','Evpatoria','Kerch','Sevastopol','Simferopol','Feodosia','Yalta','Baсk']
     id_krim = [1532,1336,1335,1328,1334,1337,1091]
     
-    #Список городов округа и их id
+    #Список городов округа и их id / List of cities in the district and their IDs
     eng_city_n_w = ['Apatity','Arkhangelsk','Velikiye Luki','Veliky Novgorod','Veliky Ustyug','Vologda','Vorkuta','Vyborg',
 'Gatchina','Guryevsk','Other cities of the NWFD','Inta','Kaliningrad','Kandalaksha','Kingisepp','Kirishi','Koryazhma','Kostomuksha',
 'Kotlas','Lomonosov','Monchegorsk','Murmansk','Naryan-Mar','Novodvinsk','Petrozavodsk','Pechora','Pskov','Pushkin',
@@ -49,7 +49,7 @@ class  Main_parser(ttk.Combobox):
     id_n_w = [1486,166,492,231,613,121,367,823,1075,793,72,617,152,614,462,600,1069,474,616,764,232,151,902,1068,147,615,153,1170,127,431,637,
     563,143,120,1660,154,169,]
     
-    #Список городов округа и их id
+    #Список городов округа и их id / List of cities in the district and their IDs
     eng_city_prv = ['Alexandrovsk','Almetyevsk','Arzamas','Balakovo','Balashov','Belebey','Beloretsk','Berezniki','Bor','Bugulma',
 'Buguruslan','Buzuluk','Volzhsk','Volodarsk','Volsk','Votkinsk','Vyatskiye Polyany','Glazov','Dzerzhinsk','Dimitrovgrad',
 'Other cities of the Volga Federal District','Yelabuga','Zhigulevsk','Zarechny','Zelenodolsk','Izhevsk','Ishimbai','Yoshkar-Ola','Kazan',
@@ -60,12 +60,12 @@ class  Main_parser(ttk.Combobox):
     659,148,433,759,709,1242,220,951,1360,134,1356,227,312,129,92,639,1434,184,260,1358,144,945,1359,638,259,477,379,381,149,183,626,
     935,233,1100]
         
-    #Список городов округа и их id
+    #Список городов округа и их id / List of cities in the district and their IDs
     eng_city_kavkaz = ['Budennovsk','Vladikavkaz','Georgievsk','Grozny','Derbent','Other cities with-KFO','Essentuki','Zheleznovodsk',
     'Kislovodsk','Makhachkala','Mineralnye Vody','Nazran','Nalchik','Nevinnomyssk','Pyatigorsk','Stavropol','Khasavyurt','Baсk']
     id_kavkaz = [725,674,1135,441,541,635,618,1145,396,675,1143,979,250,164,634,257,933]
     
-    #Список городов округа и их id
+    #Список городов округа и их id / List of cities in the district and their IDs
     eng_city_sibir = ['Abakan','Aginskoe','Angarsk','Anzhero-Sudzhensk','Achinsk','Barnaul','Belovo','Berdsk','Biysk','Bogotol','Bodaibo',
 'Bratsk','Gorno - Altaysk','Other cities of the SFD','Dudinka','Zheleznogorsk','Irkutsk','Kamen-na-Ob','Kansk','Kemerovo','Krasnokamensk',
 'Krasnoyarsk','Kuibyshev','Kyzyl','Leninsk-Kuznetsky','Mezhdurechensk','Nizhneudinsk','Novoaltaysk','Novokuznetsk','Novosibirsk','Norilsk',
@@ -74,7 +74,7 @@ class  Main_parser(ttk.Combobox):
     id_sibir = [5,459,103,399,102,26,612,751,46,948,238,43,619,84,653,1017,18,248,179,3,99,4,1099,178,175,949,249,989,25,2,94,34,218,91,1105,
     14,44,247,12,246,145,159,13,799,177]
     
-    #Список городов округа и их id
+    #Список городов округа и их id / List of cities in the district and their IDs
     eng_city_ural = ['Bogdanovich','Verkhnyaya Pyshma','Other cities of the UFO','Yekaterinburg','Zavodoukovsk','Zlatoust','Ishim',
     'Kamensk-Uralsky','Kamyshlov','Krasnouralsk','Kurgan','Kusa','Kyshtym','Labytnangi','Magnitogorsk', 'Megion','Miass','Nadym',
     'Nefteyugansk','Nizhnevartovsk','Nizhny Tagil','Novy Urengoy','Noyabrsk','Nyagan','Pervouralsk','Pyt-Yah','Dir','Salekhard','Serov',
@@ -83,7 +83,7 @@ class  Main_parser(ttk.Combobox):
     id_ural = [390,1158,86,52,700,545,222,408,1161,434,185,553,1609,784,223,950,1185,1162,1107,93,221,482,1156,783,1020,1157,1038,849,769,1057,
     155,224,1131,162,1130,1155,1159,1492,785,51,812,1108,1129]
     
-    #Список городов округа и их id
+    #Список городов округа и их id / List of cities in the district and their IDs
     eng_city_tcentral = ['Alexandrov','Belgorod','Bobrov','Borisoglebsk','Borovsk','Bryansk','Vladimir','Volgorechensk','Voronezh','Voskresensk',
 'Vyazniki','Vyazma','Goose-Crystal','Dedovsk','Dmitrov','Dolgoprudny','Domodedovo','Other cities of the Central Federal District','Yelets',
 'Zheleznodorozhny','Zhukovsky','Zelenograd','Ivanovo','Ivanteevka','Istra','Kaluga','Kashira','Kireevsk','Klimovsk','Wedge','Klintsy','Carpets',
@@ -95,7 +95,7 @@ class  Main_parser(ttk.Combobox):
     1194,446,400,450,105,1015,536,167,1495,165,1150,1465,320,1033,118,658,765,230,517,370,351,609,170,610,1149,1431,1151,883,718,608,1053,
     229,122,1672,168,242,239,1879,1025,1022,128,119,117,606,1643,559,607,605,1032,463,104]
     
-    #Список городов округа и их id
+    #Список городов округа и их id / List of cities in the district and their IDs
     eng_city_ug = ['Abinsk','Azov','Anapa','Absheronsk','Armavir','Astrakhan','Akhtubinsk','Bataysk','Belogorsk (Crimea)','Belorechensk',
     'Volgograd','Volgodonsk','Volzhsky','Gelendzhik','Gukovo','Gulkevichi','Other cities of the Southern Federal District','Yeysk',
     'Kamensk-Shakhtinsky','Kotovo','Krasnodar','Krymsk','Kurganinsk','Labinsk','Maykop','Millerovo', 'Novorossiysk','Novocherkassk',
@@ -104,159 +104,159 @@ class  Main_parser(ttk.Combobox):
     id_ug = [756,532,590,1137,150,409,1140,643,1354,1063,139,391,631,253,1138,1133,158,251,1139,511,135,685,1136,1061,256,1052,252,632,125,
     1060,146,760,418,952,1142,1062,1144,1134,254,461,422]
     
-    #Список городов Абхазии и их id
+    #Список городов Абхазии и их id / List of cities of Abkhazia and their IDs
     eng_city_abhazia = ['Other cities of Azerbaijan','Sukhumi','Back']
     id_abhazia = [206,205]
     
-    #Список городов Азербайджана и их id
+    #Список городов Азербайджана и их id / List of cities of Azerbaijan and their IDs
     eng_city_azerbaizhdan = ['Baku','Other cities of Azerbaijan','Back']
     id_azerbaizhan = [190,191]
     
-    #Список городов Армении и их id
+    #Список городов Армении и их id / List of Armenian cities and their IDs
     eng_city_armenia = ['Other cities of Armenia','Yerevan','Back']
     id_armenia = [210,209]
     
-    #Список городов Беларуссии и их id
+    #Список городов Беларусии и их id / List of cities in Belarus and their IDs
     eng_city_WR = ['Baranovichi','Bobruisk','Borisov','Brest','Vitebsk','Gomel','Gorki','Grodno','Other cities of Belarus',
  'Lida','Minsk','Mogilev','Polotsk','Rogachev','Back']
     id_WR = [627,300,755,629,186,628,753,349,182,445,181,384,187,258]
     
-    #Список городов Бельгии и их id
+    #Список городов Бельгии и их id / List of cities in Belgium and their IDs
     eng_city_belghuem = ['Antwerp','Other cities in Belghuem','Back']
     id_belghuem = [357,744]
     
-    #Список городов Германии и их id
+    #Список городов Германии и их id / List of German cities and their IDs
     eng_city_german = ['Other cities in Germany','Cologne','Stuttgart','Back']
     id_german = [236,1425,722]
     
-    #Список городов Греции и их id
+    #Список городов Греции и их id / List of Greek cities and their IDs
     eng_city_grec = ['Athens','Other cities in Greece','Back']
     id_grec = [1490,1491]
 
-    #Список городов Грузии и их id
+    #Список городов Грузии и их id / List of Georgian cities and their IDs
     eng_city_gruzia = ['Other cities of Georgia','Tbilisi','Back']
     id_gruzia = [208,207]
 
-    #Список городов Израиля и их id
+    #Список городов Израиля и их id / List of Israeli cities and their IDs
     eng_city_izrail = ['Ashdod','Beersheba','Other cities of Israel','Remez','Tel Aviv','Hodera','Back']
     id_izrail = [344,360,213,211,470,212]
 
-    #Список городов Испании и их id
+    #Список городов Испании и их id / List of Spanish cities and their IDs
     eng_city_ispania =['Other cities in Spain','Cadiz','Urense','Back']
     id_ispania = [747,376,724]
 
-    #Список городов Италии и их id
+    #Список городов Италии и их id / List of Italian cities and their IDs
     eng_city_italy = ['Other cities in Italy','Maranello','Milan','Rimini','Back']
     id_italy = [748,261,1445,1414]
 
-    #Список городов Казахстана и их id
+    #Список городов Казахстана и их id / List of cities of Kazakhstan and their IDs
     eng_city_kazahstan = ['Aktau','Aktobe','Almaty','Astana','Atyrau','Other cities of Kazakhstan','Zhezkazagan','Karaganda','Kokshetau',
  'Kostanay','Kyzylorda','Pavlodar','Petropavlovsk','Rudny','Families','Semipalatinsk','Taraz','Uralsk','Ust - Kamenogorsk','Shymkent','Back']
     id_kazahstan = [649,644,131,141,303,132,1554,137,651,540,729,133,267,648,1461,650,660,217,647,762]
 
-    #Список городов Кипра и их id
+    #Список городов Кипра и их id / List of cities in Cyprus and their IDs
     eng_city_kipr = ['','Back']
     id_kipr = ['']
 
-    #Список городов Киргизии и их id
+    #Список городов Киргизии и их id / List of cities of Kyrgyzstan and their IDs
     eng_city_kirgiz = ['Bishkek','Dalian','Other cities of Kyrgyzstan','Back']
     id_kirgiz = [542,767]
 
-    #Список городов Китая и их id
+    #Список городов Китая и их id / List of Chinese cities and their IDs
     eng_city_chine = ['Hong Kong','Dalian','Other cities in China','Beijing','Back']
     id_chine = [1605,840,839,838]
 
-    #Список городов Латвии и их id
+    #Список городов Латвии и их id / List of Latvian cities and their IDs
     eng_city_latvia = ['Other cities of Latvia','Riga','Back']
     id_latvia = [202,201]
 
-    #Список городов Литвы и их id
+    #Список городов Литвы и их id / List of Lithuanian cities and their IDs
     eng_city_litva = ['Vilnos','Other cities of Lithuania','Klaipeda','Back']
     id_litva = [354,215,214]
 
-    #Список городов Молдовы и их id
+    #Список городов Молдовы и их id / List of Moldovan cities and their IDs
     eng_city_moldova = ['Balti','Other cities of Moldova','Kishenev','Back']
     id_moldova = [525,200,199]
 
-    #Список городов Монголии и их id
+    #Список городов Монголии и их id / List of cities in Mongolia and their IDs
     eng_city_mongolia = ['Other cities of Mongolia','Ulaanbaatar','Back']
     id_mongolia = [245,244]
 
-    #Список городов Португалии и их id
+    #Список городов Португалии и их id / List of Portuguese cities and their IDs
     eng_city_port = ['','Back']
     id_port = ['']
 
-    #Список городов США и их id
+    #Список городов США и их id / List of US cities and their IDs
     eng_city_usa = ['Other US cities','New York','Back']
     id_usa = [886,885]
 
-    #Список городов Таджикистана и их id
+    #Список городов Таджикистана и их id / List of cities in Tajikistan and their IDs
     eng_city_tadzhstan = ['Other cities of Tajikistan','Dushanbe','Leninabad','Khujand','Back']
     id_tadzhstan = [194,192,193,954]
 
-    #Список городов Туркменистана и их id
+    #Список городов Туркменистана и их id / List of cities of Turkmenistan and their IDs
     eng_city_turkman = ['Ashgabat','Other cities of Turkmenistan','Back']
     id_turkman = [188,189]
 
-    #Список городов Узбекистана и их id
+    #Список городов Узбекистана и их id / List of cities of Uzbekistan and their IDs
     eng_city_uzbkst = ['Bishkek','Other cities of Uzbekistan','Tashkent','Back']
     id_uzbkst = [1458,216,827]
 
-    #Список городов Украины и их id
+    #Список городов Украины и их id / List of Ukrainian cities and their IDs
     eng_city_ukrain = ['Vinnytsia','Dnepropetrovsk','Donetsk','Other cities of Ukraine','Zhytomyr','Zaporozhye','Izmail','Kiev','Kirovograd',
  'Kremenchuk','Lutsk','Lviv','Mariupol','Melitopol','Odessa','Poltava','Rivne','Sumy','Kharkiv','Chernihiv','Back']
     id_ukrain = [623,196,568,198,622,624,1092,455,620,1550,424,621,382,625,197,544,1289,539,195,1090]
 
-    #Список городов Эстонии и их id
+    #Список городов Эстонии и их id / List of Estonian cities and their IDs
     eng_city_estonia = ['Other cities of Estonia','Tallinn','Back']
     id_estonia = [204,203]
 
-    #Список городов Сербии и их id
+    #Список городов Сербии и их id / List of cities in Serbia and their IDs
     eng_city_serbia = ['Belgrade','Other cities in Serbia','Back']
     id_serbia = [1064,1065]
 
-    #Список городов Польши и их id
+    #Список городов Польши и их id / List of Polish cities and their IDs
     eng_city_poland = ['Warsaw','Wroclaw','Other cities Poland','Kielce','Krakow','Back']
     id_poland = [1238,1629,1240,1627,1239]
 
-    #Список городов Великобритании и их id
+    #Список городов Великобритании и их id / List of UK cities and their IDs
     eng_city_great_br = ['Birmingham','Glasgow','Other UK cities','Liverpool','London','Manchester','Edinburgh','Back']
     id_great_br = [1244,1245,1249,1248,1243,1246,1247]
 
-    #Список городов Турции и их id
+    #Список городов Турции и их id / List of cities in Turkey and their IDs
     eng_city_turkchis = ['Other cities in Turkey','Istanbul','Back']
     id_turkchis = [1291,1290]
 
-    #Список городов Чехии и их id
+    #Список городов Чехии и их id / List of Czech cities and their IDs
     eng_city_chexzia = ['Other Czech cities','Nymburk','Prague','Back']
     id_chexzia = [1366,1368,1365]
 
-    #Список городов Кореи и их id
+    #Список городов Кореи и их id / List of Korean cities and their IDs
     eng_city_korea = ['Seoul','Back']
     id_korea = [1448]
 
-    #Список городов Болгарии и их id
+    #Список городов Болгарии и их id / List of Bulgarian cities and their IDs
     eng_city_bolgaria = ['Burgas','Varna','Dobrich','Other cities of Bolgraia','Pleven','Plovdiv','Ruse','Sliven',
 'Sofia','Stara-Zagora','Shumen','Back']
     id_bolgaria = [1511,1510,1515,1518,1514,1509,1512,1516,1508,1513,1517]
 
-    #Список городов Вьетнама и их id
+    #Список городов Вьетнама и их id / List of cities in Vietnam and their IDs
     eng_city_vietham = ['Other cities in Vietnam','Hanoi','Ho Chi Minh City','Back']
     id_vietham = [1608,1606,1607]
 
-    #Список городов Тайваня и их id
+    #Список городов Тайваня и их id / List of cities in Taiwan and their IDs
     eng_city_taiwan = ['Other cities in Taiwan','Xinbei','Taipei','Back']
     id_taiwan = [1634,1633,1632]
 
-    #Список городов Ирана и их id
+    #Список городов Ирана и их id / List of cities in Iran and their IDs
     eng_city_iran = ['Other cities of Iran','Tehran','Back']
     id_iran = [1690,1689]
 
-    #Список городов Бенина и их id
+    #Список городов Бенина и их id / List of Benin cities and their IDs
     eng_city_benin = ['Other cities of Benin','Cotonou','Porto-Novo','Back']    
     id_benin = [1824,1823,1822]
 
-    #Список структур компании и их id
+    #Список структур компании и их id / List of company structures and their IDs
     eng_company = ['Company structure','Wholesaler', 'Distributor', 'Commercial Logistician', 'Own Retail', 'Manufacturer', 
  'Vending machines', 'Importer']
     id_s_c = ['all','opt','distr','comlog','rozn','proiz','vend','import']
@@ -264,16 +264,16 @@ class  Main_parser(ttk.Combobox):
     #Основное окно приложения
     win = tkinter.Tk()
 
-    #Кнопка вкл звук
+    #Кнопка вкл звук темной темы / On sound button (Dark theme)
     on_dark = tkinter.PhotoImage(file='icons/zvuk.png')
-    #Кнопка выкл звук
+    #Кнопка выкл звук темной темы / Off sound button (Dark theme)
     off_dark = tkinter.PhotoImage(file='icons/zvuk_off.png')
-    #Кнопка вкл звук
+    #Кнопка вкл звук светлой темы / On sound button (Light theme)
     on_light = tkinter.PhotoImage(file='icons/zvuk_light.png')
-    #Кнопка выкл звук
+    #Кнопка выкл звук светлой темы / Off sound button (Light theme)
     off_light = tkinter.PhotoImage(file='icons/zvuk_off_light.png')
 
-    #Инициализируем музыку и звуковой эффект нажатия кнопок
+    #Инициализируем музыку и звуковой эффект нажатия кнопок / Initialize the music and the sound effect of pressing the buttons
     is_on = True 
     pygame.mixer.pre_init(44100, -16, 1, 512) 
     pygame.mixer.init()
@@ -285,45 +285,45 @@ class  Main_parser(ttk.Combobox):
     pygame.mixer.music.set_volume(0.3) 
     pygame.mixer.music.play(loops=-1) 
 
-    #Считываем положение главного окна
+    #Считываем положение главного окна / Reading the position of the main window
     x = win.winfo_x()
     y = win.winfo_y()
     
-    #Переменная для парсинга данных в виде DataFrame
+    #Переменная для парсинга данных в виде DataFrame / Variable for parsing data in the form of a DataFrame
     df = pd.DataFrame
   
-    #Словарь для сохранения пути сохранения фалйа
+    #Словарь для сохранения пути сохранения файла / Dictionary for saving the file save path
     save = {}
 
-    #Список для спаршенной информации
+    #Список для спаршенной информации / List for parse
     catalog = []
 
-    #Переменная выбора города
+    #Переменная выбора города / City selection variable
     eng_selection_main = 'Choose a city'
 
-    #Переменная текущего времени для даты в названии файла
+    #Переменная текущего времени для даты в названии файла / The current time variable for the date in the file name
     timestr = time.strftime("%Y-%m-%d %H-%M-%S") 
     vrema = timestr
 
-    #Переменная выбора формата имени файла для сохранения (с датой/без даты)
-    yes_not = False 
+    #Переменная выбора формата имени файла для сохранения (с датой/без даты) / Variable for selecting the file name format to save (with/without date)
+    yes_not = False
 
-    #Переменная выбора формата файла для сохранения
+    #Переменная выбора формата файла для сохранения / Variable for selecting the file format to save
     format = 'Excel'
 
-    #Переменная для перевода структуры компании в буквы для url
+    #Переменная для перевода структуры компании в буквы для url / Variable for translating company structure into letters for url
     value_cstr_comp = 'all'
 
-    #Переменая для состояни приветсвенных окон
+    #Переменная для состояния приветсветнных окон / Variable for the state of welcome windows
     zapusk = False 
 
-    #переменная для указания пути
+    #переменная для указания пути / variable for specifying the path
     put_save = r'C:\Users\applm\OneDrive\Рабочий стол\Parser с DataFrame\Parser\save.json'
 
-    #для перевода города в цифру для url
+    #для перевода города в цифру для url / to convert a city to a digit for a url
     value_city = 0
 
-    #Для приветственного окона
+    #Для приветственного окна / For the welcome window
     if 'avto.json':
         try: 
             with open ('avto.json','r',encoding='utf-8') as f:
@@ -331,7 +331,7 @@ class  Main_parser(ttk.Combobox):
         except: 
             pass
 
-    #Для сохранения темы
+    #Для сохранения темы / To save the theme
     if 'theme.json': 
         try: 
             with open ('theme.json','r',encoding='utf-8') as f:
@@ -347,7 +347,7 @@ class  Main_parser(ttk.Combobox):
             icon = on_dark
             ok = '#18181a'
 
-    #Для указания пути сохранения
+    #Для указания пути сохранения / To specify the save path
     if put_save: 
         try:  
             with open ('save.json','r',encoding='utf-8') as f:
@@ -356,7 +356,7 @@ class  Main_parser(ttk.Combobox):
         except: 
             directory = os.getcwd()
 
-    #Окно приветствия
+    #Окно приветствия / Welcome Window
     def WindowHello(self):
         def hel(): 
             Main_parser.s_button.play() 
@@ -381,9 +381,9 @@ class  Main_parser(ttk.Combobox):
         tkinter.Button(hello, text="Russian",font='arial 10',command=hel).place(x=33,y=112)
         tkinter.Button(hello, text="English",font='arial 10',command=hel).place(x=117,y=112) 
 
-    #Музыка
+    #Музыка / Music
     def zvuk(self): 
-        Main_parser.s_button.play() #
+        Main_parser.s_button.play() 
         if Main_parser.theme == '#18181a': 
             if Main_parser.is_on: 
                 self.Sound.config(image = Main_parser.off_dark,background='#18181a') 
@@ -403,7 +403,7 @@ class  Main_parser(ttk.Combobox):
                 Main_parser.is_on = True
                 pygame.mixer.music.unpause() 
 
-    #Окно завершения работы программы
+    #Окно завершения работы программы / Program Shutdown window
     def WindowEnd(self):
         def exit(): 
             Main_parser.s_button.play() 
@@ -427,7 +427,7 @@ class  Main_parser(ttk.Combobox):
         Labrl2.place(x=29,y=16)
         tkinter.Button(end, text="okey",font='arial 12', command=exit).place(x=100,y=110) 
     
-    #Окно информации о копирайте
+    #Окно информации о копирайте / Copyright Information Window
     def WindowCopyRight (self):
         def copy(): 
             Main_parser.s_button.play() 
@@ -462,7 +462,7 @@ https://t.me/marshansky (@marshansky)''',font='arial 9')
         Label2.place(x=69,y=86) 
         tkinter.Button(copyright, text="okey",font='arial 12', width=10,command=copy).place(x=237,y=317) 
 
-    #Уведомление о пользовательском соглашении
+    #Уведомление о пользовательском соглашении / Notification of the User Agreement
     def soglahenie(self):
         def sogl(): 
             Main_parser.s_button.play() 
@@ -487,7 +487,7 @@ See appendix 2"''',font='arial 9')
         Label2.place(x=90,y=17) 
         tkinter.Button(soglasie,text="okey",font='arial 12',command=sogl, width=7).place(x=160,y=112) 
 
-    #Уведомление о руководстве пользования
+    #Уведомление о руководстве пользования / Notice of the User Manual
     def ruk(self):
         def rik(): 
             Main_parser.s_button.play() 
@@ -511,7 +511,7 @@ See appendix 2"''',font='arial 9')
         Label2.place(x=90,y=17)
         tkinter.Button(ruko,text="okey",font='arial 12',command=rik, width=7).place(x=160,y=112) 
     
-    #Окно уведомления об изменении пути сохранения файла
+    #Окно уведомления об изменении пути сохранения файла / Notification window for changing the file save path
     def path(self):
         def pith(): 
             Main_parser.s_button.play() 
@@ -533,7 +533,7 @@ See appendix 2"''',font='arial 9')
         Label1.pack(side='top',pady=60) 
         tkinter.Button(put,text="okey",font='arial 12',command=pith, width=7).place(x=120,y=110)  
 
-    #Окно вопроса о закрытии программы
+    #Окно вопроса о закрытии программы / The window of the question about closing the program
     def WindowClose (self):
         def not_exit(): 
             Main_parser.s_button.play() 
@@ -558,15 +558,15 @@ See appendix 2"''',font='arial 9')
         Okey = tkinter.Button(close, text="oкey",font='arial 12',command=self.yes_exit, width=6) 
         Okey.place(x=82,y=110)
         Cancel = tkinter.Button(close, text="cancel",font='arial 12',command=not_exit) 
-        Cancel.place(x=167,y=110) #
+        Cancel.place(x=167,y=110) 
 
-    #Функция подтверждения закрытия программы
+    #Функция подтверждения закрытия программы / Program closing confirmation function
     def yes_exit(self):
         Main_parser.s_button.play() 
         time.sleep(0.1) 
         Main_parser.win.destroy() 
 
-    #Окно ошибки неверно выбранного города для парсинга
+    #Окно ошибки неверно выбранного города для парсинга / Error window of incorrectly selected city for parsing
     def error_city (self):
         def irror_city(): 
             Main_parser.s_button.play() 
@@ -588,7 +588,7 @@ See appendix 2"''',font='arial 9')
         Label1.pack(side='top',pady=60) 
         tkinter.Button(error,text="okey",font='arial 12',command=irror_city, width=7).place(x=110,y=110)
     
-    #Окно ошибки при отсутсвии интернета/сайт не доступен
+    #Окно ошибки при отсутсвтии интернета/сайт не доступен / Error window when there is no Internet/the site is unavailable
     def error_inet (self):
         def irror_inet(): 
             Main_parser.s_button.play() 
@@ -612,66 +612,64 @@ See appendix 2"''',font='arial 9')
         Label2.place(x=5,y=17) 
         tkinter.Button(error,text="okey",font='arial 12',command=irror_inet, width=7).place(x=120,y=110)
 
-    #Функция GUI основного окна приложения
+    #Функция GUI основного окна приложения / GUI function of the main application window
     def GUI(self):
         
-        #Заголовок основного окна
+        #Заголовок основного окна / Title of the main window
         Main_parser.win.title("Panel to control") 
 
-        #Главное меню
+        #Главное меню / Main Menu
         menubar = tkinter.Menu(self.win) 
-
-        #Главное меню
         self.win.config(menu=menubar)
 
-        #Пункт меню View
+        #Пункт меню View /  Мenu item View
         settings_vid = tkinter.Menu(menubar,tearoff=0) 
 
-        #Пункт меню Update
+        #Пункт меню Update / Menu item Update
         settings_obnova = tkinter.Menu(menubar,tearoff=0) 
 
-        #Пункт меню File
+        #Пункт меню File / File menu item
         settings_menu = tkinter.Menu(menubar,tearoff=0) 
 
-        #Пункт пеню Information
+        #Пункт меню Information / Menu item Information
         settings_sprvk = tkinter.Menu(menubar,tearoff=0)    
 
-        #Подпункты меню 1)Language и 2)Theme
+        #Подпункты меню 1)Language и 2)Theme / Menu items 1)Language and 2)Theme
         settings_vid2 = tkinter.Menu(settings_vid,tearoff=0) #1)
         settings_vid3 = tkinter.Menu(settings_vid,tearoff=0) #2)
 
-        #Пункт меню File
+        #Пункт меню File / File menu item
         settings_menu.add_command(label='Reload',command=self.reload) 
         settings_menu.add_command(label='Specify the path',command=self.put_file) 
         settings_menu.add_separator() 
         settings_menu.add_command(label='Exit',command=self.win.destroy, activebackground = 'red') 
         menubar.add_cascade(label='File', menu=settings_menu) 
 
-        #Пункт подпункт меню View, Theme
+        #Подпункт меню View, Theme / Menu sub-item View, Theme
         settings_vid.add_cascade(label='Theme',menu=settings_vid3) 
         settings_vid3.add_radiobutton(label='Dark',command=self.dark_theme) 
         settings_vid3.add_radiobutton(label='Light',command=self.light_theme) 
 
-        #Пункт подпункт меню View, Langueague
+        #Подпункт меню View, Language / Menu sub-item View, Language
         settings_vid.add_cascade(label='Language', menu=settings_vid2) 
         settings_vid2.add_command(label='Русский') 
         settings_vid2.add_command(label='English')
 
-        #Пункт меню View
+        #Пункт меню View / View menu item
         menubar.add_cascade(label='View', menu=settings_vid) 
 
-        #Пункт меню Information
+        #Пункт меню Information / Menu item Information
         settings_sprvk.add_command(label='Manual',command=self.ruk) 
         settings_sprvk.add_command(label='Copyright',command=self.WindowCopyRight) 
         settings_sprvk.add_command(label='Use argeement',command=self.soglahenie) 
         menubar.add_cascade(label='Information', menu=settings_sprvk) 
 
-        #Пункт меню Update
+        #Пункт меню Update / Menu item Update
         settings_obnova.add_command(label='Update countries') 
         settings_obnova.add_command(label='Update cities') 
         menubar.add_cascade(label ='Update', menu=settings_obnova) 
         
-        #Размеры + начальное расположение основного окна
+        #Размеры + начальное расположение основного окна / Dimensions + initial location of the main window
         screen_width = Main_parser.win.winfo_screenwidth() 
         screen_width2 = screen_width//2 - 280 
         screen_height = Main_parser.win.winfo_screenheight() 
@@ -680,20 +678,20 @@ See appendix 2"''',font='arial 9')
         Main_parser.win.minsize(560,350)
         Main_parser.win.resizable(False,False)
 
-        #Иконка главного окна
+        #Иконка главного окна / Main window icon
         icons = tkinter.PhotoImage(file='icons/chain.png')
         Main_parser.win.wm_iconphoto(False,icons) 
         
-        #Кнопка запуска
+        #Кнопка запуска / Start button
         self.btn_start = tkinter.Button(Main_parser.win,text='Start the programm',font='arial 16',command=self.parse) 
         self.btn_start.place(x=180,y=225) 
         
-        #Убрать фокус элемента при его выборе в combobox
+        #Удаление фокуса с выбранного элемента в списке / Removing focus from the selected item in the list
         def defocus(event):
             Main_parser.s_button.play() 
             event.widget.master.focus_set() 
 
-        #Список городов
+        #Список городов / List of cities
         self.spisok_main = ttk.Combobox(Main_parser.win,values=Main_parser.eng_city_main,font='arial 14',state="readonly",cursor='hand2') 
         self.spisok_main.current('0') 
         self.spisok_main.config(cursor="hand2") 
@@ -701,7 +699,7 @@ See appendix 2"''',font='arial 9')
         self.spisok_main.bind('<<ComboboxSelected>>',self.selected_city) 
         self.spisok_main.bind("<FocusIn>", defocus) 
 
-        #Список структур компаний
+        #Список структур компаний / List of company structures
         self.spisok_comp = ttk.Combobox(Main_parser.win,values=Main_parser.eng_company,font='arial 14',state="readonly")
         self.spisok_comp.current('0') 
         self.spisok_comp.config(cursor="hand2") 
@@ -709,7 +707,7 @@ See appendix 2"''',font='arial 9')
         self.spisok_comp.bind('<<ComboboxSelected>>',self.selected_str)
         self.spisok_comp.bind("<FocusIn>", defocus) 
 
-        #Список формата имени файла
+        #Список формата имени файла / List of file name format
         self.sp_time = ttk.Combobox(Main_parser.win,values=['Without data','With data'],font='arial 14',state="readonly")
         self.sp_time.current('0') 
         self.sp_time.config(cursor="hand2") 
@@ -717,7 +715,7 @@ See appendix 2"''',font='arial 9')
         self.sp_time.bind('<<ComboboxSelected>>',self.selected_time) 
         self.sp_time.bind("<FocusIn>", defocus) 
 
-        #Список форматов сохранения файла
+        #Список форматов сохранения файла / List of file saving formats
         self.sp_format = ttk.Combobox(Main_parser.win,values=['Excel','CSV','TXT'],font='arial 14',state="readonly") 
         self.sp_format.current('0') 
         self.sp_format.config(cursor="hand2") 
@@ -725,13 +723,13 @@ See appendix 2"''',font='arial 9')
         self.sp_format.bind('<<ComboboxSelected>>',self.selected_format) 
         self.sp_format.bind("<FocusIn>", defocus) 
 
-        #Установка начальной темы главного окна
+        #Установка начальной темы главного окна / Setting the initial theme of the main window
         if Main_parser.theme == '#fdfff5':
             self.light_theme()
         else: 
             self.dark_theme()
 
-    #Часы и дата в главном окне
+    #Часы и дата в главном окне / Clock and date in the main window
     def chasi (self):
         if Main_parser.theme == '#fdfff5': 
             Clock = tkinter.Label(Main_parser.win,text='' ,font=('arial', 12),background='#fdfff5', foreground='#18181a')
@@ -750,12 +748,12 @@ See appendix 2"''',font='arial 9')
         Clock1.config(text=string_data) 
         Clock1.after(60000, self.chasi)
     
-    #Кнопка паузы/анпазуы музыки
+    #Кнопка паузы/анпаузы музыки / Button pause/unpause music
     def knopka_zvuka(self): 
         self.Sound = tkinter.Button(Main_parser.win,image=Main_parser.icon,background=Main_parser.ok,command=self.zvuk)
         self.Sound.place(x=15,y=280) 
 
-    #Функция определения выбранног города с конвертацией в id для url
+    #Функция определения выбранног города с конвертацией в id для url / The function of determining the selected city with conversion to id for url
     def selected_city(self,event):
         Main_parser.selection_main = self.spisok_main.get()
         Main_parser.s_button.play()
@@ -1309,7 +1307,8 @@ See appendix 2"''',font='arial 9')
 
         if Main_parser.selection_main == 'Back':
             self.spisok_main['values'] = Main_parser.eng_city_main
-            
+    
+    #Функция обработки выбора структуры компании для url / The function of processing the selection of the company structure for the url
     def selected_str(self,event):
         Main_parser.selection_str_comp = self.spisok_comp.get()
         Main_parser.s_button.play()
@@ -1323,13 +1322,13 @@ See appendix 2"''',font='arial 9')
         except (IndexError):
             pass
     
-    #Функция перезапуска приложения
+    #Функция перезапуска приложения / Application restart function
     def reload(self):
         self.win.winfo_children()[0].destroy()
         [child.destroy() for child in self.win.winfo_children()]
         self.GUI()
 
-    #Светлая тема приложения
+    #Светлая тема приложения / Light theme of the application
     def light_theme(self):
         Main_parser.theme = '#fdfff5'
         with open ('theme.json','w',encoding='utf-8') as file:
@@ -1350,7 +1349,7 @@ See appendix 2"''',font='arial 9')
         self.Sound.place(x=15,y=280)
         self.chasi()
 
-    #Темная тема приложения
+    #Темная тема приложения / Dark theme of the application
     def dark_theme(self):
         Main_parser.theme = '#18181a'
         with open ('theme.json','w',encoding='utf-8') as file:
@@ -1370,7 +1369,7 @@ See appendix 2"''',font='arial 9')
         self.Sound.place(x=15,y=280)
         self.chasi()
 
-    #Функция указания пути сохранения файла
+    #Функция указания пути сохранения файла / The function of specifying the file save path
     def put_file(self):
         Main_parser.directory = fd.askdirectory(title="Specify the path where the program result will be saved", initialdir="/")
         if Main_parser.directory != "":
@@ -1381,12 +1380,12 @@ See appendix 2"''',font='arial 9')
         with open ('save.json','w',encoding='utf-8') as file:
             json.dump(Main_parser.save,file,indent=4,ensure_ascii=False)
 
-    #Функция выбора формата файла
+    #Функция выбора формата файла / File format selection function
     def selected_format (self,event):
         Main_parser.format = self.sp_format.get()
         Main_parser.s_button.play()
     
-    #Функция выбора формата имени файла
+    #Функция выбора формата имени файла / File name format selection function
     def selected_time (self,event):
         Main_parser.yes_not = self.sp_time.get()
         Main_parser.s_button.play()
@@ -1395,7 +1394,7 @@ See appendix 2"''',font='arial 9')
         else:
             Main_parser.yes_not = False
 
-    #Парсер
+    #Парсер/Web - scrapper
     def parse (self):
         Main_parser.s_button.play()
         if Main_parser.selection_main in Main_parser.zapret: 
@@ -1404,20 +1403,17 @@ See appendix 2"''',font='arial 9')
             url_for_inb = f'http://foodmarkets.ru/firms/filter_result/7/{Main_parser.value_cstr_comp}/{Main_parser.value_city}/posted' 
             soup2 = BeautifulSoup(requests.get(url_for_inb).content, 'lxml') 
             try: 
-                try: 
-                    kekes = soup2.find ('span',class_='pagelink').contents[6].text 
-                    kek = int (kekes) 
-                    inb = 1  
-                    while inb <= kek: 
-                        url = f'http://foodmarkets.ru/firms/filter_result/7/{Main_parser.value_cstr_comp}/{Main_parser.value_city}/posted/page{inb}' 
-                        soup = BeautifulSoup(requests.get(url).content, 'lxml')
-                        for row in soup.select('tr:has(td.tcl)'): 
-                            tds = [cell.get_text(strip=True, separator=' ') for cell in row.select('td')]
-                            Main_parser.catalog.append(tds) 
-                            Main_parser.df = pd.DataFrame(Main_parser.catalog, columns=['Name company', 'Cities', 'Comments', 'Last message']) 
-                        inb = inb+1
-                except: 
-                    self.error_inet()
+                kekes = soup2.find ('span',class_='pagelink').contents[6].text 
+                kek = int (kekes) 
+                inb = 1  
+                while inb <= kek: 
+                    url = f'http://foodmarkets.ru/firms/filter_result/7/{Main_parser.value_cstr_comp}/{Main_parser.value_city}/posted/page{inb}' 
+                    soup = BeautifulSoup(requests.get(url).content, 'lxml')
+                    for row in soup.select('tr:has(td.tcl)'): 
+                        tds = [cell.get_text(strip=True, separator=' ') for cell in row.select('td')]
+                        Main_parser.catalog.append(tds) 
+                        Main_parser.df = pd.DataFrame(Main_parser.catalog, columns=['Name company', 'Cities', 'Comments', 'Last message'])
+                    inb = inb+1
             except: 
                 kekes = None 
                 try:
@@ -1425,21 +1421,22 @@ See appendix 2"''',font='arial 9')
                     soup = BeautifulSoup(requests.get(url).content, 'lxml')
                     for row in soup.select('tr:has(td.tcl)'): 
                         tds = [cell.get_text(strip=True, separator=' ') for cell in row.select('td')]
-                        Main_parser.catalog.append(tds) 
-                        Main_parser.df = pd.DataFrame(Main_parser.catalog, columns=['Name company', 'Cities', 'Comments', 'Last message']) 
-                except: 
+                        Main_parser.catalog.append(tds)
+                        Main_parser.df = pd.DataFrame(Main_parser.catalog, columns=['Name company', 'Cities', 'Comments', 'Last message'])
+                except:
                     self.error_inet()
-            finally: 
+            finally:
+                print ('okay')
                 if Main_parser.format == 'Excel':
                     self.excel()
                 elif Main_parser.format == 'CSV':
                     self.csv()
                 elif Main_parser.format == 'TXT':
-                    self.txt() 
-                self.WindowEnd() 
-                Main_parser.catalog[:] = [] 
+                    self.txt()
+                self.WindowEnd()
+                Main_parser.catalog[:] = []
 
-    #Сохранение в excel
+    #Сохранение в excel / Saving to excel
     def excel(self):
         if Main_parser.yes_not == True: 
             writer_exlc = pd.ExcelWriter(f'{Main_parser.directory}\{Main_parser.selection_str_comp} от {Main_parser.vrema}.xlsx', engine='xlsxwriter')
@@ -1447,24 +1444,24 @@ See appendix 2"''',font='arial 9')
             writer_exlc.save()
         elif Main_parser.yes_not == False: 
             writer_exlc = pd.ExcelWriter(f'{Main_parser.directory}\{Main_parser.selection_str_comp}.xlsx', engine='xlsxwriter')
-            Main_parser.df.to_excel(writer_exlc, sheet_name=f'{Main_parser.selection_str_comp}', index=False)
+            Main_parser.df.to_excel(writer_exlc, sheet_name=f'{Main_parser.selection_str_comp}',index=False)
             writer_exlc.save()
 
-    #Сохранение в csv
+    #Сохранение в csv / Saving to csv
     def csv (self):
         if Main_parser.yes_not == True: 
             Main_parser.df.to_csv(f'{Main_parser.directory}\{Main_parser.selection_str_comp} от {Main_parser.vrema}.csv', sep='\t', encoding='utf-8')
         elif Main_parser.yes_not == False: 
             Main_parser.df.to_csv(f'{Main_parser.directory}\{Main_parser.selection_str_comp}.csv', sep='\t', encoding='utf-8')
 
-    #Сохранение в txt
+    #Сохранение в txt / Saving to txt
     def txt(self):
         if Main_parser.yes_not == True: 
             Main_parser.df.to_string(f'{Main_parser.directory}\{Main_parser.selection_str_comp} от {Main_parser.vrema}.txt', encoding='utf-8')
         elif Main_parser.yes_not == False: 
             Main_parser.df.to_string(f'{Main_parser.directory}\{Main_parser.selection_str_comp}.txt', encoding='utf-8')
 
-    #Инициализация интерфейса и приветственных окон
+    #Инициализация интерфейса и приветственного окона / Initializing the interface and welcome window
     def create_INTF_eng(self):
         self.GUI() 
         if Main_parser.zapusk == False:
@@ -1478,6 +1475,6 @@ See appendix 2"''',font='arial 9')
         self.knopka_zvuka()
         Main_parser.win.mainloop()
 
-#Инициализация класса и функции запуска
+#Инициализация класса и функции запуска / Initializing the class and the startup function
 start = Main_parser() 
 start.create_INTF_eng()
