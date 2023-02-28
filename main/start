@@ -1,0 +1,84 @@
+import json
+import tkinter
+from tkinter import Canvas
+import pygame
+import time
+import config
+
+#Для проверки версии
+
+
+#Звук нажатия кнопок
+pygame.mixer.pre_init(44100, -16, 1, 512) 
+pygame.mixer.init()
+s_button = pygame.mixer.Sound('Sound/Button.mp3') 
+s_button.set_volume(0.25) 
+
+#Для первого запуска
+if 'avto.json':
+        try: 
+            with open ('avto.json','r',encoding='utf-8') as f:
+                zapusk = json.load(f)
+        except: 
+            zapusk = False
+
+#Окно приветствия
+def WindowHello():
+
+    #Для русской версии
+    def rus ():
+        s_button.play()
+        time.sleep(1)
+        hello.destroy()
+        from rus import Main_parser_rus
+        config.version = True
+        with open ('version.json','w',encoding='utf-8') as f:
+                json.dump(config.version,f,indent=4,ensure_ascii=False)
+    
+    #Для русской версии
+    def eng():
+        s_button.play()
+        time.sleep(1)
+        hello.destroy()
+        from eng import Main_parser_eng
+        config.version = False
+        with open ('version.json','w',encoding='utf-8') as f:
+                json.dump(config.version,f,indent=4,ensure_ascii=False)
+
+    hello = tkinter.Tk()
+    hello.title('Hi!')
+    hello.geometry(f'200x150+{665}+{200}') 
+    hello.resizable(False,False) 
+    canvas = Canvas(hello, width=220,height=150) 
+    canvas.place(x=-10,y=0) 
+    canvas.create_rectangle(0,0,220,50,fill='#18181a') 
+    canvas1 = Canvas(hello, width=220,height=150) 
+    canvas1.place(x=-10,y=100) 
+    canvas1.create_rectangle(0,0,220,100,fill='#18181a') 
+    icons2 = tkinter.PhotoImage(file='icons/hand.png') 
+    hello.wm_iconphoto(False,icons2)  
+    Label1 = tkinter.Label(hello,text='Welcome!\nSelect interface language',font='arial 10') 
+    Label1.place(x=25,y=58) 
+    Label2 = tkinter.Label(hello,text='Copyright © 2023 P.V. Marshansky',font='arial 9',foreground='#fdfff5',background='#18181a') 
+    Label2.place(x=3,y=17) 
+    tkinter.Button(hello, text="Russian",font='arial 10',command=rus).place(x=33,y=112)
+    tkinter.Button(hello, text="English",font='arial 10',command=eng).place(x=117,y=112)
+    hello.mainloop()
+
+#Для сохранения информации о запуске
+if zapusk == False:
+            zapusk = True
+            with open ('avto.json', 'w', encoding='utf-8') as f:
+                json.dump(zapusk,f,indent=4,ensure_ascii=False)
+            WindowHello()
+else: 
+    pass
+
+#Если окно уже запускалось
+if zapusk == True:
+    with open ('version.json','r',encoding='utf-8') as f:
+        config.version = json.load(f)
+    if config.version == True:
+        from rus import Main_parser_rus
+    else:
+        from eng import Main_parser_eng
